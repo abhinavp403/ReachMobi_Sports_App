@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ReachMobi Sports App</string>
+    <string name="enter_sports_team">Enter Sports Team...</string>
+    <string name="go">GO</string>
 </resources>
