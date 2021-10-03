@@ -19,7 +19,7 @@
             android:padding="6dp">
 
             <TextView
-                android:id="@+id/league_name_tv"
+                android:id="@+id/league_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -29,10 +29,10 @@
                 android:textSize="14sp"/>
 
             <TextView
-                android:id="@+id/event_name_tv"
+                android:id="@+id/event_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/league_name_tv"
+                android:layout_below="@+id/league_name"
                 android:layout_marginTop="2dp"
                 android:text="ndjwndjnj"
                 android:layout_centerHorizontal="true"
@@ -40,10 +40,10 @@
                 android:textSize="12sp"/>
 
             <TextView
-                android:id="@+id/home_team_tv"
+                android:id="@+id/home_team"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/event_name_tv"
+                android:layout_below="@+id/event_name"
                 android:layout_marginTop="2dp"
                 android:layout_marginStart="4dp"
                 android:text="ndjwndjnj"
@@ -52,11 +52,11 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/home_score_tv"
+                android:id="@+id/home_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/event_name_tv"
-                android:layout_toEndOf="@+id/home_team_tv"
+                android:layout_below="@+id/event_name"
+                android:layout_toEndOf="@+id/home_team"
                 android:layout_marginTop="2dp"
                 android:layout_marginStart="4dp"
                 android:text="1"
@@ -65,10 +65,10 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/away_team_tv"
+                android:id="@+id/away_team"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/event_name_tv"
+                android:layout_below="@+id/event_name"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="4dp"
                 android:layout_alignParentEnd="true"
@@ -78,11 +78,11 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/away_score_tv"
+                android:id="@+id/away_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/event_name_tv"
-                android:layout_toStartOf="@+id/away_team_tv"
+                android:layout_below="@+id/event_name"
+                android:layout_toStartOf="@+id/away_team"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="4dp"
                 android:text="1"
@@ -91,10 +91,10 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/venue_tv"
+                android:id="@+id/venue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/home_team_tv"
+                android:layout_below="@+id/home_team"
                 android:layout_marginTop="2dp"
                 android:text="ndjwndjnj"
                 android:layout_centerHorizontal="true"
@@ -102,10 +102,10 @@
                 android:textSize="14sp"/>
 
             <TextView
-                android:id="@+id/date_tv"
+                android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/venue_tv"
+                android:layout_below="@+id/venue"
                 android:layout_marginTop="2dp"
                 android:text="ndjwndjnj"
                 android:layout_centerHorizontal="true"
