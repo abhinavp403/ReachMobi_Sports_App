@@ -28,5 +28,9 @@ data class Event(
     @SerializedName("dateEvent")
     val eventDate: String = "",
     @SerializedName("strVenue")
-    val venue: String = ""
+    val venue: String = "",
+    @SerializedName("strStatus")
+    val status: String = "",
+    var homeBadge: String = "",
+    var awayBadge: String = ""
 )

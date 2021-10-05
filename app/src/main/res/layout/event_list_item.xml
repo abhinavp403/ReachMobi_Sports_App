@@ -23,7 +23,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="ndjwndjnj"
                 android:layout_centerHorizontal="true"
                 android:textColor="@android:color/black"
                 android:textSize="14sp"/>
@@ -34,21 +33,27 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/league_name"
                 android:layout_marginTop="2dp"
-                android:text="ndjwndjnj"
                 android:layout_centerHorizontal="true"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"/>
+
+            <ImageView
+                android:id="@+id/home_team_badge"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/event_name"
+                android:layout_marginTop="2dp"
+                android:layout_marginStart="10dp" />
 
             <TextView
                 android:id="@+id/home_team"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/event_name"
+                android:layout_below="@+id/home_team_badge"
                 android:layout_marginTop="2dp"
                 android:layout_marginStart="4dp"
-                android:text="ndjwndjnj"
                 android:textColor="@android:color/black"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"/>
 
             <TextView
@@ -56,25 +61,45 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/event_name"
-                android:layout_toEndOf="@+id/home_team"
-                android:layout_marginTop="2dp"
-                android:layout_marginStart="4dp"
-                android:text="1"
+                android:layout_toStartOf="@+id/dash"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="10dp"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/away_team"
+                android:id="@+id/dash"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/event_name"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:text="-"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/away_team_badge"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/event_name"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="10dp"
+                android:layout_alignParentEnd="true"/>
+
+            <TextView
+                android:id="@+id/away_team"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/away_team_badge"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="4dp"
                 android:layout_alignParentEnd="true"
-                android:text="ndjwndj"
                 android:textColor="@android:color/black"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"/>
 
             <TextView
@@ -82,10 +107,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/event_name"
-                android:layout_toStartOf="@+id/away_team"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="4dp"
-                android:text="1"
+                android:layout_toEndOf="@+id/dash"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="10dp"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
@@ -96,7 +121,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/home_team"
                 android:layout_marginTop="2dp"
-                android:text="ndjwndjnj"
                 android:layout_centerHorizontal="true"
                 android:textColor="@android:color/black"
                 android:textSize="14sp"/>
@@ -107,7 +131,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/venue"
                 android:layout_marginTop="2dp"
-                android:text="ndjwndjnj"
                 android:layout_centerHorizontal="true"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"

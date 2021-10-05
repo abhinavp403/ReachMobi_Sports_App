@@ -4,5 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class EventResponse(
     @SerializedName("results")
-    val results: List<Event>
+    val results: List<Event>,
+    @SerializedName("events")
+    val events: List<Event>
 )

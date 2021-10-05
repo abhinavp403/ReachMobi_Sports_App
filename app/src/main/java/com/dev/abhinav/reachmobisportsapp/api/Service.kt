@@ -1,11 +1,8 @@
 package com.dev.abhinav.reachmobisportsapp.api
 
 import com.dev.abhinav.reachmobisportsapp.model.EventResponse
-import com.dev.abhinav.reachmobisportsapp.model.Team
 import com.dev.abhinav.reachmobisportsapp.model.TeamResponse
-import io.reactivex.Observable
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -21,7 +18,7 @@ interface Service {
     fun getSeasonEventsByTeamID(@Query("id") teamId: String, @Query("s") year: String): Call<EventResponse>
 
     @GET("searchteams.php")
-    fun getTeamID(@Query("t") teamName: String): Call<TeamResponse>
+    fun getTeamDetails(@Query("t") teamName: String): Call<TeamResponse>
 
     companion object {
         var service: Service? = null

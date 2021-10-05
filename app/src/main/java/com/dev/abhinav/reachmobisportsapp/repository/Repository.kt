@@ -8,5 +8,5 @@ class Repository(private val api: Service) {
 
     fun getTeamSeasonEvents(teamId: String, year: String) = api.getSeasonEventsByTeamID(teamId, year)
 
-    fun getTeamDetails(teamName: String) = api.getTeamID(teamName)
+    fun getTeamDetails(teamName: String) = api.getTeamDetails(teamName)
 }
