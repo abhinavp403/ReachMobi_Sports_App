@@ -17,21 +17,21 @@ import retrofit2.Response
 
 class EventViewModel(private val repository: Repository) : ViewModel() {
 
-    private val seasonsList = listOf("2021-2022", "2020-2021", "2019-2020", "2018-2019", "2017-2018")
+    private val seasonsList = listOf("2021-2022", "2020-2021", "2019-2020", "2018-2019", "2017-2018", "2021", "2020", "2019", "2018", "2017")
 
-    private val _eventsLiveData = MutableLiveData<List<Event>>()
-    private var _teamId = MutableLiveData<String>()
-    private var _leagueId = MutableLiveData<String>()
-    private var _leagueIds = MutableLiveData<List<String?>>()
+    private val _eventsLiveData = MutableLiveData<List<Event>?>()
+    private var _teamId = MutableLiveData<String?>()
+    private var _leagueIds = MutableLiveData<List<String?>?>()
+    private var _status = MutableLiveData<Boolean?>()
 
-    val eventsLiveData: LiveData<List<Event>>
+    val eventsLiveData: LiveData<List<Event>?>
         get() = _eventsLiveData
-    val teamId: LiveData<String>
+    val teamId: LiveData<String?>
         get() = _teamId
-    val leagueId: LiveData<String>
-        get() = _leagueId
-    val leagueIds: LiveData<List<String?>>
+    val leagueIds: LiveData<List<String?>?>
         get() = _leagueIds
+    val status: LiveData<Boolean?>
+        get() = _status
 
     fun getLastFiveTeamEvents(teamId: String) {
         viewModelScope.launch {
@@ -58,11 +58,11 @@ class EventViewModel(private val repository: Repository) : ViewModel() {
 
                 call.enqueue(object : Callback<EventResponse> {
                     override fun onResponse(call: Call<EventResponse?>, response: Response<EventResponse?>) {
-                        val events = response.body()!!.events
-                        if(events != null) {
+                        if (response.body()!!.events != null) {
+                            val events = response.body()!!.events
                             val eventsList = mutableListOf<Event>()
                             for (i in response.body()!!.events.indices) {
-                                if (events[i].status != "Not Started" || events[i].status != "NS") {
+                                //if (events[i].status == "Match Finished" || events[i].status == "FT") {
                                     if (events[i].homeTeamId == teamId || events[i].awayTeamId == teamId) {
                                         viewModelScope.launch {
                                             events[i].homeBadge = getTeamBadge(events[i].homeTeam)
@@ -70,7 +70,7 @@ class EventViewModel(private val repository: Repository) : ViewModel() {
                                         }
                                         eventsList.add(events[i])
                                     }
-                                }
+                                //}
                             }
                             _eventsLiveData.postValue(eventsList)
                         }
@@ -91,21 +91,25 @@ class EventViewModel(private val repository: Repository) : ViewModel() {
 
             call.enqueue(object : Callback<TeamResponse> {
                 override fun onResponse(call: Call<TeamResponse?>, response: Response<TeamResponse?>) {
-                    for (i in response.body()!!.teams.indices) {
-                        if(response.body()!!.teams[i].teamName == teamName || response.body()!!.teams[i].teamNameAlternate == teamName) {
-                           _teamId.postValue(response.body()!!.teams[i].teamId)
-                            _leagueId.postValue(response.body()!!.teams[i].leagueId1)
-                            val leagueIdList = mutableListOf<String>()
-                            leagueIdList.add(response.body()!!.teams[i].leagueId1)
-                            leagueIdList.add(response.body()!!.teams[i].leagueId2)
-                            leagueIdList.add(response.body()!!.teams[i].leagueId3)
-                            leagueIdList.add(response.body()!!.teams[i].leagueId4)
-                            leagueIdList.add(response.body()!!.teams[i].leagueId5)
-                            leagueIdList.add(response.body()!!.teams[i].leagueId6)
-                            leagueIdList.add(response.body()!!.teams[i].leagueId7)
-                            _leagueIds.postValue(leagueIdList)
-                            break
+                    if (response.body()!!.teams != null) {
+                        _status.value = true
+                        for (i in response.body()!!.teams.indices) {
+                            if (response.body()!!.teams[i].teamName == teamName || response.body()!!.teams[i].teamNameAlternate == teamName) {
+                                _teamId.postValue(response.body()!!.teams[i].teamId)
+                                val leagueIdList = mutableListOf<String>()
+                                leagueIdList.add(response.body()!!.teams[i].leagueId1)
+                                leagueIdList.add(response.body()!!.teams[i].leagueId2)
+                                leagueIdList.add(response.body()!!.teams[i].leagueId3)
+                                leagueIdList.add(response.body()!!.teams[i].leagueId4)
+                                leagueIdList.add(response.body()!!.teams[i].leagueId5)
+                                leagueIdList.add(response.body()!!.teams[i].leagueId6)
+                                leagueIdList.add(response.body()!!.teams[i].leagueId7)
+                                _leagueIds.postValue(leagueIdList)
+                                break
+                            }
                         }
+                    } else {
+                        _status.value = false
                     }
                 }
 
@@ -122,7 +126,10 @@ class EventViewModel(private val repository: Repository) : ViewModel() {
             val call = repository.getTeamDetails(teamName)
             call.enqueue(object : Callback<TeamResponse> {
                 override fun onResponse(call: Call<TeamResponse?>, response: Response<TeamResponse?>) {
-                    badge.complete(response.body()!!.teams[0].teamBadge)
+                    if (response.body()!!.teams != null) {
+                        Log.d("kkk", teamName)
+                        badge.complete(response.body()!!.teams[0].teamBadge)
+                    }
                 }
 
                 override fun onFailure(call: Call<TeamResponse?>, t: Throwable) {

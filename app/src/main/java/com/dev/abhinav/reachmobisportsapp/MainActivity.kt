@@ -1,6 +1,7 @@
 package com.dev.abhinav.reachmobisportsapp
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -28,60 +29,73 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+        // Get Retrofit instance which is created in Service class
         retrofitService = Service.getInstance()
+
+        // Create view model via view model factory
+        viewModel = ViewModelProvider(this, EventViewModelFactory(Repository(retrofitService))).get(EventViewModel::class.java)
+
+        // Set recycler view adapter
         adapter = EventListAdapter()
         binding.eventRecyclerView.adapter = adapter
 
-        viewModel = ViewModelProvider(this, EventViewModelFactory(Repository(retrofitService))).get(
-            EventViewModel::class.java
-        )
-
+        // Search api invoked when GO button is clicked
         binding.goButton.setOnClickListener {
+            eventsList.clear()
             val teamName = binding.teamName.text.toString()
-            getTeamId(teamName)
+            getTeamLeagueId(teamName)
         }
-    }
 
-    private fun getTeamId(teamName: String) {
-        viewModel.getTeamAndLeagueId(teamName)
+        viewModel.status.observe(this) { status ->
+            if(status == false) {
+                Toast.makeText(applicationContext, "Team Not Found", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         viewModel.teamId.observe(this) {
             lifecycleScope.launch {
-                teamId = it
-                //getEventDetails()
+                teamId = it!!
+                //getLastFiveEventDetails()
             }
         }
-        viewModel.leagueId.observe(this) {
-            lifecycleScope.launch {
-                leagueId = it
-                //getEventDetails()
-            }
-        }
+
         viewModel.leagueIds.observe(this) { it ->
             lifecycleScope.launch {
-                it.forEach {
+                it!!.forEach {
                     if(it != null) {
                         leagueId = it
-                        getEventDetails()
+                        getSeasonEventDetails()
                     }
                 }
             }
-            viewModel.eventsLiveData.observe(this@MainActivity) { it ->
-                eventsList.addAll(it)
-                eventsList.sortByDescending {
-                    it.eventDate
-                }
-                adapter.setEventList(eventsList)
+        }
+
+        viewModel.eventsLiveData.observe(this@MainActivity) { events ->
+            eventsList.addAll(events!!)
+            eventsList.sortByDescending {
+                it.eventDate
             }
+            adapter.setEventList(eventsList)
         }
     }
 
-    private fun getEventDetails() {
-        //viewModel.getLastFiveTeamEvents(teamId)
+    // Method to get team id and league id
+    private fun getTeamLeagueId(teamName: String) {
+        viewModel.getTeamAndLeagueId(teamName)
+    }
+
+    // Method to get events of last five seasons
+    private fun getSeasonEventDetails() {
         viewModel.getTeamSeasonEvents(leagueId, teamId)
-//        viewModel.eventsLiveData.observe(this) {
-//            lifecycleScope.launch {
-//                adapter.setEventList(it)
-//            }
-//        }
+    }
+
+    // Method to get last five events
+    private fun getLastFiveEventDetails() {
+        viewModel.getLastFiveTeamEvents(teamId)
+        viewModel.eventsLiveData.observe(this) {
+            lifecycleScope.launch {
+                adapter.setEventList(it!!)
+            }
+        }
     }
 }

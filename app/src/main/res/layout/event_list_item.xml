@@ -22,10 +22,11 @@
                 android:id="@+id/league_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
                 android:layout_centerHorizontal="true"
-                android:textColor="@android:color/black"
-                android:textSize="14sp"/>
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/purple_500"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/event_name"
@@ -50,11 +51,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/home_team_badge"
-                android:layout_marginTop="2dp"
                 android:layout_marginStart="4dp"
-                android:textColor="@android:color/black"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/mukta_vaani_semibold"
+                android:textColor="#3E3E3E"
                 android:textSize="16sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/home_score"
@@ -76,7 +78,7 @@
                 android:layout_below="@+id/event_name"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
-                android:text="-"
+                android:text="@string/dash"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
@@ -95,12 +97,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/away_team_badge"
+                android:layout_alignParentEnd="true"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="4dp"
-                android:layout_alignParentEnd="true"
-                android:textColor="@android:color/black"
+                android:fontFamily="@font/mukta_vaani_semibold"
+                android:textColor="#3E3E3E"
                 android:textSize="16sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/away_score"
@@ -120,10 +123,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/home_team"
-                android:layout_marginTop="2dp"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/alice"
                 android:textColor="@android:color/black"
-                android:textSize="14sp"/>
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/date"
