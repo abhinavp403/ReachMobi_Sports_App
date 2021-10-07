@@ -127,7 +127,6 @@ class EventViewModel(private val repository: Repository) : ViewModel() {
             call.enqueue(object : Callback<TeamResponse> {
                 override fun onResponse(call: Call<TeamResponse?>, response: Response<TeamResponse?>) {
                     if (response.body()!!.teams != null) {
-                        Log.d("kkk", teamName)
                         badge.complete(response.body()!!.teams[0].teamBadge)
                     }
                 }

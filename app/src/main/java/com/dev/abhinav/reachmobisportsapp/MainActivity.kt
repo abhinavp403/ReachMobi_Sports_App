@@ -48,7 +48,8 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.status.observe(this) { status ->
             if(status == false) {
-                Toast.makeText(applicationContext, "Team Not Found", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Team Not Found", Toast.LENGTH_LONG).show()
+                adapter.setEventList(eventsList)
             }
         }
 
